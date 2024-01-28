@@ -1,0 +1,58 @@
+{
+  "name": "azuyalabs/php-cs-fixer-config",
+  "description": "PHP CS Fixer config for AzuyaLabs projects",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "PHP",
+    "style",
+    "configuration",
+    "php-cs-fixer"
+  ],
+  "readme": "README.md",
+  "authors": [
+    {
+      "name": "Sacha Telgenhof",
+      "email": "me@sachatelgenhof.com",
+      "homepage": "https://www.sachatelgenhof.com",
+      "role": "Maintainer"
+    }
+  ],
+  "homepage": "https://github.com/azuyalabs/php-cs-fixer-config",
+  "support": {
+    "issues": "https://gitlab.com/azuyalabs/php-cs-fixer-config/-/issues",
+    "source": "https://gitlab.com/azuyalabs/php-cs-fixer-config",
+    "docs": "https://gitlab.com/azuyalabs/php-cs-fixer-config"
+  },
+  "funding": [
+    {
+      "type": "other",
+      "url": "https://www.buymeacoffee.com/sachatelgenhof"
+    }
+  ],
+  "require": {
+    "php": "^7.4 || ^8",
+    "friendsofphp/php-cs-fixer": "^3.48"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "AzuyaLabs\\PhpCsFixerConfig\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Azuyalabs\\PhpCsFixerConfig\\Test\\": "test"
+    }
+  },
+  "scripts": {
+    "check": [
+      "@cs",
+      "@test"
+    ],
+    "cs": "php-cs-fixer fix -v --diff --dry-run",
+    "cs-fix": "php-cs-fixer fix -v --diff",
+    "test": "phpunit"
+  }
+}
