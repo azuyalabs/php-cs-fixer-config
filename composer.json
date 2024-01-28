@@ -34,8 +34,7 @@
     "php": "^7.4 || ^8",
     "friendsofphp/php-cs-fixer": "^3.48"
   },
-  "require-dev": {
-  },
+  "require-dev": {},
   "autoload": {
     "psr-4": {
       "AzuyaLabs\\PhpCsFixerConfig\\": "src"
@@ -58,7 +57,6 @@
       "@psalm"
     ],
     "format": "vendor/bin/php-cs-fixer fix",
-    "infection": "vendor/bin/infection run -j 2",
     "phpstan": "vendor/bin/phpstan analyse",
     "psalm": "vendor/bin/psalm --threads=2",
     "test": "vendor/bin/phpunit"
