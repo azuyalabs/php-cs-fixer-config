@@ -46,13 +46,21 @@
       "Azuyalabs\\PhpCsFixerConfig\\Test\\": "test"
     }
   },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    },
+    "sort-packages": true
+  },
   "scripts": {
-    "check": [
-      "@cs",
-      "@test"
+    "analyse": [
+      "@phpstan",
+      "@psalm"
     ],
-    "cs": "php-cs-fixer fix -v --diff --dry-run",
-    "cs-fix": "php-cs-fixer fix -v --diff",
-    "test": "phpunit"
+    "format": "vendor/bin/php-cs-fixer fix",
+    "infection": "vendor/bin/infection run -j 2",
+    "phpstan": "vendor/bin/phpstan analyse",
+    "psalm": "vendor/bin/psalm --threads=2",
+    "test": "vendor/bin/phpunit"
   }
 }
