@@ -72,8 +72,8 @@ final class Config extends PhpCsFixerConfig
         }
 
         $header = \str_replace(['/**', '/*', ' */', ' * ', ' *'], '', $header);
-        $package = 'unknown';
 
+        $package = 'unknown';
         if (\is_readable(self::COMPOSER_FILENAME)) {
             $package = \json_decode(\file_get_contents(self::COMPOSER_FILENAME))->name;
         }
