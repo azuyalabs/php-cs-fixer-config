@@ -49,6 +49,9 @@ final class Config extends PhpCsFixerConfig
           'header_comment' => [
               'comment_type' => 'PHPDoc',
           ],
+          'concat_space' => [
+              'spacing' => 'one',
+          ],
 
           // risky
           'declare_strict_types' => true,
@@ -111,7 +114,7 @@ final class Config extends PhpCsFixerConfig
     {
         $now = date('Y');
         if ($now !== $this->inceptionYear) {
-            return $this->inceptionYear.' - '.$now;
+            return $this->inceptionYear . ' - ' . $now;
         }
 
         return $this->inceptionYear;
