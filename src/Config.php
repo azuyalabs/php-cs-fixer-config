@@ -35,7 +35,7 @@ final class Config extends PhpCsFixerConfig
     public function getRules(): array
     {
         $rules = [
-          '@PER' => true,
+          '@PER-CS' => true,
           '@Symfony' => true,
           'combine_consecutive_issets' => true,
           'combine_consecutive_unsets' => true,
