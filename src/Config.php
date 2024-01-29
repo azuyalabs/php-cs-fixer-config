@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the azuyalabs/php-cs-fixer-config package.
+ * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
+ * A PHP CS Fixer config for AzuyaLabs projects.
  *
- * Copyright (c) 2015 - 2024 AzuyaLabs
+ * Copyright (c) 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,11 +22,11 @@ final class Config extends PhpCsFixerConfig
 {
     private const ORG = 'AzuyaLabs';
 
-    private const HEADER_FILENAME = '.header';
-
     private const COMPOSER_FILENAME = 'composer.json';
 
-    public function __construct()
+    private const UNKNOWN_VALUE = 'unknown';
+
+    public function __construct(private string $inceptionYear = '2015')
     {
         parent::__construct(self::ORG);
 
@@ -66,27 +67,53 @@ final class Config extends PhpCsFixerConfig
 
     private function headerComment(array $rules): array
     {
-        $header = self::ORG;
-        $hdr_file = dirname(__DIR__).DIRECTORY_SEPARATOR.self::HEADER_FILENAME;
-        if (\is_readable($hdr_file)) {
-            $header = \file_get_contents($hdr_file);
-        }
+        $header = <<<'HDR'
+        This file is part of the '%package%' package.
+        A %description%.
 
-        $header = \str_replace(['/**', '/*', ' */', ' * ', ' *'], '', $header);
+        Copyright (c) %years% %org%
 
-        $package = 'unknown';
+        For the full copyright and license information, please view the LICENSE
+        file that was distributed with this source code.
+
+        @author Sacha Telgenhof <me at sachatelgenhof dot com>
+        HDR;
+
+        $cmp = null;
         if (\is_readable(self::COMPOSER_FILENAME)) {
-            $package = \json_decode(\file_get_contents(self::COMPOSER_FILENAME))->name;
+            $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
+            $package = $cmp->name;
+            $description = $cmp->description;
         }
 
         $header = \str_replace(
-            ['%org%', '%package%', '%year%'],
-            [self::ORG, $package, (new \DateTime('now'))->format('Y')],
+            [
+                '%org%',
+                '%package%',
+                '%description%',
+                '%years%',
+            ],
+            [
+                self::ORG,
+                $cmp->name ?? self::UNKNOWN_VALUE,
+                $cmp->description ?? self::UNKNOWN_VALUE,
+                $this->renderCopyrightYears(),
+            ],
             $header
         );
 
         $rules['header'] = \trim($header);
 
         return $rules;
+    }
+
+    private function renderCopyrightYears(): string
+    {
+        $now = date('Y');
+        if ($now !== $this->inceptionYear) {
+            return $this->inceptionYear.' - '.$now;
+        }
+
+        return $this->inceptionYear;
     }
 }

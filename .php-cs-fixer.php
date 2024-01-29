@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-$config = new AzuyaLabs\PhpCsFixerConfig\Config();
+$config = new AzuyaLabs\PhpCsFixerConfig\Config('2024');
 $config->getFinder()->in(__DIR__);
 
 return $config;
