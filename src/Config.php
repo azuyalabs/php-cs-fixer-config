@@ -83,7 +83,7 @@ final class Config extends PhpCsFixerConfig
         if (\is_readable(self::COMPOSER_FILENAME)) {
             $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
             $package = $cmp->name;
-            $description = $cmp->description;
+            $description = lcfirst($cmp->description);
         }
 
         $header = \str_replace(
