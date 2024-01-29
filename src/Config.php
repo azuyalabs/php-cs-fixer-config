@@ -1,46 +1,62 @@
 <?php
 
-/**
- * Prooph was here at `azuyalabs/php-cs-fixer-config` in `2024`! Please create a .docheader in the project root and run `composer cs-fix`
- */
-
 declare(strict_types=1);
+
+/**
+ * This file is part of the azuyalabs/php-cs-fixer-config package.
+ *
+ * Copyright (c) 2015 - 2024 AzuyaLabs
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me at sachatelgenhof dot com>
+ */
 
 namespace AzuyaLabs\PhpCsFixerConfig;
 
 use PhpCsFixer\Config as PhpCsFixerConfig;
 
-class Config extends PhpCsFixerConfig
+final class Config extends PhpCsFixerConfig
 {
+    private const ORG = 'AzuyaLabs';
+
+    private const HEADER_FILENAME = '.header';
+
+    private const COMPOSER_FILENAME = 'composer.json';
+
     public function __construct()
     {
-        parent::__construct('AzuyaLabs');
+        parent::__construct(self::ORG);
 
         $this->setRiskyAllowed(true);
     }
 
     public function getRules(): array
     {
-    $rules = [
-        '@PER' => true,
-  '@Symfony' => true,
-  'combine_consecutive_issets' => true,
-  'combine_consecutive_unsets' => true,
-  'explicit_string_variable' => true,
-  'no_superfluous_elseif' => true,
-  'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
-  'not_operator_with_successor_space' => true,
-  'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true ],
-  'ordered_class_elements' => true,
+        $rules = [
+          '@PER' => true,
+          '@Symfony' => true,
+          'combine_consecutive_issets' => true,
+          'combine_consecutive_unsets' => true,
+          'explicit_string_variable' => true,
+          'no_superfluous_elseif' => true,
+          'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
+          'not_operator_with_successor_space' => true,
+          'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
+          'ordered_class_elements' => true,
+          'header_comment' => [
+              'comment_type' => 'PHPDoc',
+          ],
 
-  // Risky
-  'declare_strict_types' => true,
-  'dir_constant' => true,
-  'get_class_to_class_keyword' => true,
-  'is_null' => true,
-  'modernize_strpos' => true,
-  'modernize_types_casting' => true,
-      'self_accessor' => true,
+          // risky
+          'declare_strict_types' => true,
+          'dir_constant' => true,
+          'get_class_to_class_keyword' => true,
+          'is_null' => true,
+          'modernize_strpos' => true,
+          'modernize_types_casting' => true,
+          'self_accessor' => true,
         ];
 
         $rules['header_comment'] = $this->headerComment($rules['header_comment']);
@@ -50,21 +66,23 @@ class Config extends PhpCsFixerConfig
 
     private function headerComment(array $rules): array
     {
-        if (\file_exists('.docheader')) {
-            $header = \file_get_contents('.docheader');
-        } else {
-            $header = $rules['header'];
+        $header = self::ORG;
+        if (\is_readable(self::HEADER_FILENAME)) {
+            $header = \file_get_contents(self::HEADER_FILENAME);
         }
 
-        // remove comments from existing .docheader or crash
-        $header = \str_replace(['/**', ' */', ' * ', ' *'], '', $header);
+        $header = \str_replace(['/**', '/*', ' */', ' * ', ' *'], '', $header);
         $package = 'unknown';
 
-        if (\file_exists('composer.json')) {
-            $package = \json_decode(\file_get_contents('composer.json'))->name;
+        if (\is_readable(self::COMPOSER_FILENAME)) {
+            $package = \json_decode(\file_get_contents(self::COMPOSER_FILENAME))->name;
         }
 
-        $header = \str_replace(['%package%', '%year%'], [$package, (new \DateTime('now'))->format('Y')], $header);
+        $header = \str_replace(
+            ['%org%', '%package%', '%year%'],
+            [self::ORG, $package, (new \DateTime('now'))->format('Y')],
+            $header
+        );
 
         $rules['header'] = \trim($header);
 
