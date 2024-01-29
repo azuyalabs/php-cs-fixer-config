@@ -67,8 +67,9 @@ final class Config extends PhpCsFixerConfig
     private function headerComment(array $rules): array
     {
         $header = self::ORG;
-        if (\is_readable(self::HEADER_FILENAME)) {
-            $header = \file_get_contents(self::HEADER_FILENAME);
+        $hdr_file = dirname(__DIR__).DIRECTORY_SEPARATOR.self::HEADER_FILENAME;
+        if (\is_readable($hdr_file)) {
+            $header = \file_get_contents($hdr_file);
         }
 
         $header = \str_replace(['/**', '/*', ' */', ' * ', ' *'], '', $header);
