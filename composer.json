@@ -60,7 +60,8 @@
       "@phpstan",
       "@psalm"
     ],
-    "format": "vendor/bin/php-cs-fixer fix",
+    "cs": "vendor/bin/php-cs-fixer fix -v --diff --dry-run",
+    "cs-fix": "vendor/bin/php-cs-fixer fix -v",
     "phpstan": "vendor/bin/phpstan analyse",
     "psalm": "vendor/bin/psalm --threads=2",
     "test": "vendor/bin/phpunit"
