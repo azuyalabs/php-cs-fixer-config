@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /**
  * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
@@ -36,31 +36,32 @@ final class Config extends PhpCsFixerConfig
     public function getRules(): array
     {
         $rules = [
-          '@PER-CS' => true,
-          '@Symfony' => true,
-          'combine_consecutive_issets' => true,
-          'combine_consecutive_unsets' => true,
-          'explicit_string_variable' => true,
-          'no_superfluous_elseif' => true,
-          'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
-          'not_operator_with_successor_space' => true,
-          'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
-          'ordered_class_elements' => true,
-          'header_comment' => [
-              'comment_type' => 'PHPDoc',
-          ],
-          'concat_space' => [
-              'spacing' => 'one',
-          ],
+            '@PER-CS' => true,
+            '@Symfony' => true,
+            'combine_consecutive_issets' => true,
+            'combine_consecutive_unsets' => true,
+            'explicit_string_variable' => true,
+            'no_superfluous_elseif' => true,
+            'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
+            'not_operator_with_successor_space' => true,
+            'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
+            'ordered_class_elements' => true,
+            'header_comment' => ['comment_type' => 'PHPDoc'],
+            'concat_space' => ['spacing' => 'one'],
+            'declare_equal_normalize' => ['space' => 'single'],
 
-          // risky
-          'declare_strict_types' => true,
-          'dir_constant' => true,
-          'get_class_to_class_keyword' => true,
-          'is_null' => true,
-          'modernize_strpos' => true,
-          'modernize_types_casting' => true,
-          'self_accessor' => true,
+            // risky
+            'declare_strict_types' => true,
+            'dir_constant' => true,
+            'get_class_to_class_keyword' => true,
+            'is_null' => true,
+            'modernize_strpos' => true,
+            'modernize_types_casting' => true,
+            'self_accessor' => true,
+            'array_indentation' => true,
+
+            // phpunit
+            'php_unit_method_casing' => ['case' => 'snake_case'],
         ];
 
         $rules['header_comment'] = $this->headerComment($rules['header_comment']);
