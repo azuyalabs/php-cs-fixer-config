@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /**
- * This file is part of the azuyalabs/php-cs-fixer-config package.
+ * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
+ * A PHP CS Fixer config for AzuyaLabs projects.
  *
- * Copyright (c) 2015 - 2024 AzuyaLabs
+ * Copyright (c) 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,11 +22,11 @@ final class Config extends PhpCsFixerConfig
 {
     private const ORG = 'AzuyaLabs';
 
-    private const HEADER_FILENAME = '.header';
-
     private const COMPOSER_FILENAME = 'composer.json';
 
-    public function __construct()
+    private const UNKNOWN_VALUE = 'unknown';
+
+    public function __construct(private string $inceptionYear = '2015')
     {
         parent::__construct(self::ORG);
 
@@ -35,28 +36,32 @@ final class Config extends PhpCsFixerConfig
     public function getRules(): array
     {
         $rules = [
-          '@PER' => true,
-          '@Symfony' => true,
-          'combine_consecutive_issets' => true,
-          'combine_consecutive_unsets' => true,
-          'explicit_string_variable' => true,
-          'no_superfluous_elseif' => true,
-          'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
-          'not_operator_with_successor_space' => true,
-          'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
-          'ordered_class_elements' => true,
-          'header_comment' => [
-              'comment_type' => 'PHPDoc',
-          ],
+            '@PER-CS' => true,
+            '@Symfony' => true,
+            'combine_consecutive_issets' => true,
+            'combine_consecutive_unsets' => true,
+            'explicit_string_variable' => true,
+            'no_superfluous_elseif' => true,
+            'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
+            'not_operator_with_successor_space' => true,
+            'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
+            'ordered_class_elements' => true,
+            'header_comment' => ['comment_type' => 'PHPDoc'],
+            'concat_space' => ['spacing' => 'one'],
+            'declare_equal_normalize' => ['space' => 'single'],
 
-          // risky
-          'declare_strict_types' => true,
-          'dir_constant' => true,
-          'get_class_to_class_keyword' => true,
-          'is_null' => true,
-          'modernize_strpos' => true,
-          'modernize_types_casting' => true,
-          'self_accessor' => true,
+            // risky
+            'declare_strict_types' => true,
+            'dir_constant' => true,
+            'get_class_to_class_keyword' => true,
+            'is_null' => true,
+            'modernize_strpos' => true,
+            'modernize_types_casting' => true,
+            'self_accessor' => true,
+            'array_indentation' => true,
+
+            // phpunit
+            'php_unit_method_casing' => ['case' => 'snake_case'],
         ];
 
         $rules['header_comment'] = $this->headerComment($rules['header_comment']);
@@ -66,26 +71,53 @@ final class Config extends PhpCsFixerConfig
 
     private function headerComment(array $rules): array
     {
-        $header = self::ORG;
-        if (\is_readable(self::HEADER_FILENAME)) {
-            $header = \file_get_contents(self::HEADER_FILENAME);
-        }
+        $header = <<<'HDR'
+        This file is part of the '%package%' package.
+        A %description%.
 
-        $header = \str_replace(['/**', '/*', ' */', ' * ', ' *'], '', $header);
+        Copyright (c) %years% %org%
 
-        $package = 'unknown';
+        For the full copyright and license information, please view the LICENSE
+        file that was distributed with this source code.
+
+        @author Sacha Telgenhof <me at sachatelgenhof dot com>
+        HDR;
+
+        $cmp = null;
         if (\is_readable(self::COMPOSER_FILENAME)) {
-            $package = \json_decode(\file_get_contents(self::COMPOSER_FILENAME))->name;
+            $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
+            $package = $cmp->name;
+            $description = lcfirst($cmp->description);
         }
 
         $header = \str_replace(
-            ['%org%', '%package%', '%year%'],
-            [self::ORG, $package, (new \DateTime('now'))->format('Y')],
+            [
+                '%org%',
+                '%package%',
+                '%description%',
+                '%years%',
+            ],
+            [
+                self::ORG,
+                $cmp->name ?? self::UNKNOWN_VALUE,
+                $cmp->description ?? self::UNKNOWN_VALUE,
+                $this->renderCopyrightYears(),
+            ],
             $header
         );
 
         $rules['header'] = \trim($header);
 
         return $rules;
+    }
+
+    private function renderCopyrightYears(): string
+    {
+        $now = date('Y');
+        if ($now !== $this->inceptionYear) {
+            return $this->inceptionYear . ' - ' . $now;
+        }
+
+        return $this->inceptionYear;
     }
 }

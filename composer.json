@@ -37,6 +37,7 @@
   "require-dev": {
     "phan/phan": "^5.4",
     "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10.5",
     "vimeo/psalm": "^5.20"
   },
   "autoload": {
@@ -46,7 +47,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Azuyalabs\\PhpCsFixerConfig\\Test\\": "test"
+      "Azuyalabs\\PhpCsFixerConfig\\Test\\": "tests"
     }
   },
   "config": {
@@ -60,7 +61,8 @@
       "@phpstan",
       "@psalm"
     ],
-    "format": "vendor/bin/php-cs-fixer fix",
+    "cs": "vendor/bin/php-cs-fixer fix -v --diff --dry-run",
+    "cs-fix": "vendor/bin/php-cs-fixer fix -v",
     "phpstan": "vendor/bin/phpstan analyse",
     "psalm": "vendor/bin/psalm --threads=2",
     "test": "vendor/bin/phpunit"

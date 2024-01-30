@@ -1,17 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * This file is part of `prooph/php-cs-fixer-config`.
- * (c) 2016-2020 prooph software GmbH <contact@prooph.de>
- * (c) 2016-2020 Sascha-Oliver Prolic <saschaprolic@googlemail.com>
+ * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
+ * A PHP CS Fixer config for AzuyaLabs projects.
+ *
+ * Copyright (c) 2024 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @author Sacha Telgenhof <me at sachatelgenhof dot com>
  */
 
-declare(strict_types=1);
-
-$config = new AzuyaLabs\PhpCsFixerConfig\Config();
+$config = new AzuyaLabs\PhpCsFixerConfig\Config('2024');
 $config->getFinder()->in(__DIR__);
 
 return $config;

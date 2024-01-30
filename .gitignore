@@ -1,3 +1,5 @@
 .php-cs-fixer.cache
 .phpactor.json
+.phpunit.cache
+.phpunit.result.cache
 vendor
