@@ -37,6 +37,7 @@
   "require-dev": {
     "phan/phan": "^5.4",
     "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10.5",
     "vimeo/psalm": "^5.20"
   },
   "autoload": {
@@ -46,7 +47,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Azuyalabs\\PhpCsFixerConfig\\Test\\": "test"
+      "Azuyalabs\\PhpCsFixerConfig\\Test\\": "tests"
     }
   },
   "config": {
