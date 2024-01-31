@@ -4,7 +4,8 @@ declare(strict_types = 1);
 
 /**
  * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
- * A PHP CS Fixer config for AzuyaLabs projects.
+ *
+ * PHP CS Fixer config for AzuyaLabs projects.
  *
  * Copyright (c) 2024 AzuyaLabs
  *

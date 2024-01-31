@@ -4,7 +4,8 @@ declare(strict_types = 1);
 
 /**
  * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
- * A PHP CS Fixer config for AzuyaLabs projects.
+ *
+ * PHP CS Fixer config for AzuyaLabs projects.
  *
  * Copyright (c) 2024 AzuyaLabs
  *
@@ -51,6 +52,8 @@ final class Config extends PhpCsFixerConfig
             'declare_equal_normalize' => ['space' => 'single'],
 
             // risky
+            'array_indentation' => true,
+            'date_time_immutable' => true,
             'declare_strict_types' => true,
             'dir_constant' => true,
             'get_class_to_class_keyword' => true,
@@ -58,7 +61,6 @@ final class Config extends PhpCsFixerConfig
             'modernize_strpos' => true,
             'modernize_types_casting' => true,
             'self_accessor' => true,
-            'array_indentation' => true,
 
             // phpunit
             'php_unit_method_casing' => ['case' => 'snake_case'],
@@ -73,7 +75,8 @@ final class Config extends PhpCsFixerConfig
     {
         $header = <<<'HDR'
         This file is part of the '%package%' package.
-        A %description%.
+
+        %description%.
 
         Copyright (c) %years% %org%
 
