@@ -75,6 +75,8 @@ final class Config extends PhpCsFixerConfig
 
         if ($this->hasHeaderComment) {
             $rules['header_comment'] = $this->headerComment($rules['header_comment']);
+        } else {
+            unset($rules['header_comment']);
         }
 
         return $rules;

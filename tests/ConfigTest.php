@@ -71,7 +71,7 @@ final class ConfigTest extends TestCase
         $config->skipHeaderComment();
 
         $rules = $config->getRules();
-        $this->assertArrayNotHasKey('header', $rules);
+        $this->assertArrayNotHasKey('header_comment', $rules);
     }
 
     /**
