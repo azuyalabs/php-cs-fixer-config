@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
+ * This file is part of the 'php-cs-fixer-config' package.
  *
  * PHP CS Fixer config for AzuyaLabs projects.
  *
@@ -60,5 +60,78 @@ final class ConfigTest extends TestCase
         $config = new Config();
         $rules = $config->getRules();
         $this->assertArrayHasKey('header_comment', $rules);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider yearProvider
+     */
+    public function it_should_have_copyright_year_in_header(?string $year, string $expected): void
+    {
+        $config = new Config($year);
+        $rules = $config->getRules();
+
+        $this->assertStringContainsString($expected, $rules['header_comment']['header']);
+    }
+
+    public static function yearProvider(): array
+    {
+        $now = date('Y');
+
+        return [
+            ['2018', sprintf('2018 - %s', $now)],
+            [$now, $now],
+            [null, sprintf('2015 - %s', $now)],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider orgProvider
+     */
+    public function it_should_have_organization_name_in_header(?string $org, string $expected): void
+    {
+        $config = new Config(date('Y'), $org);
+        $rules = $config->getRules();
+
+        $this->assertStringContainsString($expected, $rules['header_comment']['header']);
+    }
+
+    public static function orgProvider(): array
+    {
+        $now = date('Y');
+        $patt = '(c) %s %s';
+
+        return [
+            ['myOrg', sprintf($patt, $now, 'myOrg')],
+            [null, sprintf($patt, $now, 'AzuyaLabs')],
+            ['', sprintf($patt, $now, 'AzuyaLabs')],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider pkgProvider
+     */
+    public function it_should_have_package_name_in_header(?string $pkg, string $expected): void
+    {
+        $config = new Config(date('Y'), null, $pkg);
+        $rules = $config->getRules();
+
+        $this->assertStringContainsString($expected, $rules['header_comment']['header']);
+    }
+
+    public static function pkgProvider(): array
+    {
+        $patt = 'part of the \'%s\' package';
+
+        return [
+            ['myPackage', sprintf($patt, 'myPackage')],
+            [null, sprintf($patt, 'php-cs-fixer-config')],
+            ['', sprintf($patt, 'php-cs-fixer-config')],
+        ];
     }
 }

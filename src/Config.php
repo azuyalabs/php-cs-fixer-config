@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
+ * This file is part of the 'php-cs-fixer-config' package.
  *
  * PHP CS Fixer config for AzuyaLabs projects.
  *
@@ -23,12 +23,17 @@ final class Config extends PhpCsFixerConfig
 {
     private const ORG = 'AzuyaLabs';
 
+    private const BIRTH_YEAR = '2015';
+
     private const COMPOSER_FILENAME = 'composer.json';
 
     private const UNKNOWN_VALUE = 'unknown';
 
-    public function __construct(private string $inceptionYear = '2015')
-    {
+    public function __construct(
+        private ?string $yr = null,
+        private ?string $org = null,
+        private ?string $pkg = null,
+    ) {
         parent::__construct(self::ORG);
 
         $this->setRiskyAllowed(true);
@@ -73,6 +78,10 @@ final class Config extends PhpCsFixerConfig
 
     private function headerComment(array $rules): array
     {
+        if (! \is_readable(self::COMPOSER_FILENAME)) {
+            throw new \RuntimeException(sprintf('unable to read %s file', self::COMPOSER_FILENAME));
+        }
+
         $header = <<<'HDR'
         This file is part of the '%package%' package.
 
@@ -86,11 +95,19 @@ final class Config extends PhpCsFixerConfig
         @author Sacha Telgenhof <me at sachatelgenhof dot com>
         HDR;
 
-        $cmp = null;
-        if (\is_readable(self::COMPOSER_FILENAME)) {
-            $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
-            $package = $cmp->name;
-            $description = lcfirst($cmp->description);
+        $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
+
+        $description = $cmp->description ?? self::UNKNOWN_VALUE;
+        [$org, $pkg] = explode('/', $cmp->name);
+
+        if (null !== $this->pkg && '' !== $this->pkg && '0' !== $this->pkg) {
+            $pkg = $this->pkg;
+        }
+
+        if (null === $this->org || '' === $this->org) {
+            $org = ($org === strtolower(self::ORG)) ? self::ORG : $org;
+        } else {
+            $org = $this->org;
         }
 
         $header = \str_replace(
@@ -101,9 +118,9 @@ final class Config extends PhpCsFixerConfig
                 '%years%',
             ],
             [
-                self::ORG,
-                $cmp->name ?? self::UNKNOWN_VALUE,
-                $cmp->description ?? self::UNKNOWN_VALUE,
+                $org,
+                $pkg,
+                $description,
                 $this->renderCopyrightYears(),
             ],
             $header
@@ -117,10 +134,8 @@ final class Config extends PhpCsFixerConfig
     private function renderCopyrightYears(): string
     {
         $now = date('Y');
-        if ($now !== $this->inceptionYear) {
-            return $this->inceptionYear . ' - ' . $now;
-        }
+        $year = $this->yr ?? self::BIRTH_YEAR;
 
-        return $this->inceptionYear;
+        return ($now !== $year) ? $year . ' - ' . $now : $year;
     }
 }
