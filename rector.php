@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * This file is part of the 'azuyalabs/php-cs-fixer-config' package.
+ * This file is part of the 'php-cs-fixer-config' package.
  *
  * PHP CS Fixer config for AzuyaLabs projects.
  *
@@ -22,6 +22,7 @@ use Rector\Set\ValueObject\SetList;
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
         __DIR__ . '/src',
+        __DIR__ . '/tests',
     ]);
 
     // single rules
