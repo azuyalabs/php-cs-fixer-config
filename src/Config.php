@@ -29,6 +29,8 @@ final class Config extends PhpCsFixerConfig
 
     private const UNKNOWN_VALUE = 'unknown';
 
+    private bool $hasHeaderComment = true;
+
     public function __construct(
         private ?string $yr = null,
         private ?string $org = null,
@@ -71,9 +73,16 @@ final class Config extends PhpCsFixerConfig
             'php_unit_method_casing' => ['case' => 'snake_case'],
         ];
 
-        $rules['header_comment'] = $this->headerComment($rules['header_comment']);
+        if ($this->hasHeaderComment) {
+            $rules['header_comment'] = $this->headerComment($rules['header_comment']);
+        }
 
         return $rules;
+    }
+
+    public function skipHeaderComment(): void
+    {
+        $this->hasHeaderComment = false;
     }
 
     private function headerComment(array $rules): array

@@ -55,11 +55,23 @@ final class ConfigTest extends TestCase
     /**
      * @test
      */
-    public function it_does_have_header_comment_fixer_by_default(): void
+    public function it_has_header_comment_fixer_by_default(): void
     {
         $config = new Config();
         $rules = $config->getRules();
         $this->assertArrayHasKey('header_comment', $rules);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_render_header_when_skipped(): void
+    {
+        $config = new Config();
+        $config->skipHeaderComment();
+
+        $rules = $config->getRules();
+        $this->assertArrayNotHasKey('header', $rules);
     }
 
     /**
