@@ -32,13 +32,13 @@
   ],
   "require": {
     "php": "^7.4 || ^8",
-    "friendsofphp/php-cs-fixer": "^3.48"
+    "friendsofphp/php-cs-fixer": "^3.49"
   },
   "require-dev": {
     "phan/phan": "^5.4",
     "phpstan/phpstan": "^1.10",
     "phpunit/phpunit": "^10.5",
-    "vimeo/psalm": "^5.20"
+    "vimeo/psalm": "^5.21"
   },
   "autoload": {
     "psr-4": {
