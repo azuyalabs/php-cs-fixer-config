@@ -60,7 +60,6 @@ final class Config extends PhpCsFixerConfig
 
             // risky
             'array_indentation' => true,
-            'date_time_immutable' => true,
             'declare_strict_types' => true,
             'dir_constant' => true,
             'get_class_to_class_keyword' => true,
