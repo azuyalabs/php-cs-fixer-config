@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1178725272787c27974dcd99412a7d4",
+    "content-hash": "04266e8a6fdbb8feb48d30899d8b661b",
     "packages": [
         {
             "name": "composer/pcre",
