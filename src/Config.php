@@ -29,7 +29,7 @@ final class Config extends PhpCsFixerConfig
 
     private const UNKNOWN_VALUE = 'unknown';
 
-    private bool $hasHeaderComment = true;
+    private bool $useHeaderComment = true;
 
     public function __construct(
         private ?string $yr = null,
@@ -39,24 +39,23 @@ final class Config extends PhpCsFixerConfig
         parent::__construct(self::ORG);
 
         $this->setRiskyAllowed(true);
+        $this->setDefaultRules();
     }
 
-    public function getRules(): array
+    public function setDefaultRules(): void
     {
         $rules = [
+            // sets
             '@PER-CS' => true,
             '@Symfony' => true,
-            'combine_consecutive_issets' => true,
-            'combine_consecutive_unsets' => true,
-            'explicit_string_variable' => true,
-            'no_superfluous_elseif' => true,
-            'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
-            'not_operator_with_successor_space' => true,
-            'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
-            'ordered_class_elements' => true,
-            'header_comment' => ['comment_type' => 'PHPDoc'],
-            'concat_space' => ['spacing' => 'one'],
+
+            // spaces
             'declare_equal_normalize' => ['space' => 'single'],
+            'types_spaces' => [
+                'space' => 'single',
+            ],
+            'concat_space' => ['spacing' => 'one'],
+            'not_operator_with_successor_space' => true,
 
             // risky
             'array_indentation' => true,
@@ -68,24 +67,46 @@ final class Config extends PhpCsFixerConfig
             'modernize_types_casting' => true,
             'self_accessor' => true,
 
+            // phpdoc
+            'phpdoc_summary' => false,
+
             // phpunit
             'php_unit_method_casing' => ['case' => 'snake_case'],
+
+            // other
+            'combine_consecutive_issets' => true,
+            'combine_consecutive_unsets' => true,
+            'explicit_string_variable' => true,
+            'no_superfluous_elseif' => true,
+            'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
+            'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
+            'ordered_class_elements' => true,
+            'header_comment' => [
+                'header' => 'Made with love.',
+                'comment_type' => 'PHPDoc',
+            ],
         ];
 
-        if ($this->hasHeaderComment) {
+        if ($this->useHeaderComment) {
             $rules['header_comment'] = $this->headerComment($rules['header_comment']);
         } else {
             unset($rules['header_comment']);
         }
 
-        return $rules;
+        $this->setRules($rules);
     }
 
     public function skipHeaderComment(): void
     {
-        $this->hasHeaderComment = false;
+        $this->useHeaderComment = false;
+        $this->setDefaultRules();
     }
 
+    /**
+     * @param array<string> $rules
+     *
+     * @return array<string>
+     */
     private function headerComment(array $rules): array
     {
         if (! \is_readable(self::COMPOSER_FILENAME)) {

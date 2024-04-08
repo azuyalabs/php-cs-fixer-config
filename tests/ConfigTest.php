@@ -23,18 +23,14 @@ use PHPUnit\Framework\TestCase;
 
 final class ConfigTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_implements_interface(): void
     {
         $config = new Config();
         $this->assertInstanceOf(ConfigInterface::class, $config);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_correct_values(): void
     {
         $config = new Config();
@@ -43,18 +39,52 @@ final class ConfigTest extends TestCase
         $this->assertTrue($config->getRiskyAllowed());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
+    public function it_can_replace_all_rules(): void
+    {
+        $config = new Config();
+
+        $rules = [
+            'new_rule' => true,
+            'another_rule' => [
+                'foo' => 'bar',
+                'milk' => 'man',
+            ],
+        ];
+
+        $config->setRules($rules);
+
+        $this->assertSame($rules, $config->getRules());
+    }
+
+    /** @test */
+    public function it_can_override_existing_rule(): void
+    {
+        $config = new Config();
+
+        $defaults = $config->getRules();
+
+        $this->assertTrue($defaults['@PER-CS']);
+        $this->assertTrue($defaults['@Symfony']);
+
+        $config->setRules(array_merge($defaults, [
+            '@Symfony' => false,
+        ]));
+
+        $rules = $config->getRules();
+
+        $this->assertTrue($rules['@PER-CS']);
+        $this->assertFalse($rules['@Symfony']);
+    }
+
+    /** @test */
     public function it_has_rules(): void
     {
         $config = new Config();
         $this->assertNotEmpty($config->getRules());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_has_header_comment_fixer_by_default(): void
     {
         $config = new Config();
@@ -62,9 +92,7 @@ final class ConfigTest extends TestCase
         $this->assertArrayHasKey('header_comment', $rules);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_does_not_render_header_when_skipped(): void
     {
         $config = new Config();

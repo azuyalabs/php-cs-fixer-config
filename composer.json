@@ -47,7 +47,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Azuyalabs\\PhpCsFixerConfig\\Test\\": "tests"
+      "AzuyaLabs\\PhpCsFixerConfig\\Test\\": "tests"
     }
   },
   "config": {
