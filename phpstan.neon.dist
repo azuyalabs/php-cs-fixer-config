@@ -2,8 +2,6 @@ parameters:
   level: 6
   paths:
     - src
-  ignoreErrors:
-  checkGenericClassInNonGenericObjectType: false
   reportUnmatchedIgnoredErrors: true # Do not allow outdated errors in the baseline
   treatPhpDocTypesAsCertain: false
   tipsOfTheDay: false
