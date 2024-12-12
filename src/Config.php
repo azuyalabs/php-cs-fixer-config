@@ -79,7 +79,6 @@ final class Config extends PhpCsFixerConfig
             'explicit_string_variable' => true,
             'no_superfluous_elseif' => true,
             'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
-            'nullable_type_declaration_for_default_null_value' => ['use_nullable_type_declaration' => true],
             'ordered_class_elements' => true,
             'header_comment' => [
                 'header' => 'Made with love.',
