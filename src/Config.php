@@ -7,7 +7,7 @@ declare(strict_types = 1);
  *
  * PHP CS Fixer config for AzuyaLabs projects.
  *
- * Copyright (c) 2024 AzuyaLabs
+ * Copyright (c) 2024 - 2025 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
