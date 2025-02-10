@@ -125,7 +125,12 @@ final class Config extends PhpCsFixerConfig
         @author Sacha Telgenhof <me at sachatelgenhof dot com>
         HDR;
 
-        $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
+        $cmp_ct = \file_get_contents(self::COMPOSER_FILENAME);
+        if (false === $cmp_ct) {
+            throw new \RuntimeException('unable to read composer.json contents');
+        }
+
+        $cmp = \json_decode($cmp_ct);
 
         $description = $cmp->description ?? self::UNKNOWN_VALUE;
         [$org, $pkg] = explode('/', $cmp->name);
