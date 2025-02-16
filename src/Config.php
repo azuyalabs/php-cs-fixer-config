@@ -7,7 +7,7 @@ declare(strict_types = 1);
  *
  * PHP CS Fixer config for AzuyaLabs projects.
  *
- * Copyright (c) 2024 AzuyaLabs
+ * Copyright (c) 2024 - 2025 AzuyaLabs
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -125,7 +125,12 @@ final class Config extends PhpCsFixerConfig
         @author Sacha Telgenhof <me at sachatelgenhof dot com>
         HDR;
 
-        $cmp = \json_decode(\file_get_contents(self::COMPOSER_FILENAME));
+        $cmp_ct = \file_get_contents(self::COMPOSER_FILENAME);
+        if (false === $cmp_ct) {
+            throw new \RuntimeException('unable to read composer.json contents');
+        }
+
+        $cmp = \json_decode($cmp_ct);
 
         $description = $cmp->description ?? self::UNKNOWN_VALUE;
         [$org, $pkg] = explode('/', $cmp->name);
