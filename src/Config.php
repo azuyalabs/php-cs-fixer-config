@@ -140,7 +140,7 @@ final class Config extends PhpCsFixerConfig
         }
 
         if (null === $this->org || '' === $this->org) {
-            $org = ($org === strtolower(self::ORG)) ? self::ORG : $org;
+            $org = $org === strtolower(self::ORG) ? self::ORG : $org;
         } else {
             $org = $this->org;
         }
@@ -171,6 +171,6 @@ final class Config extends PhpCsFixerConfig
         $now = date('Y');
         $year = $this->yr ?? self::BIRTH_YEAR;
 
-        return ($now !== $year) ? $year . ' - ' . $now : $year;
+        return $now !== $year ? $year . ' - ' . $now : $year;
     }
 }
