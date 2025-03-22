@@ -1,0 +1,9 @@
+# skip commits by their SHA1
+
+# 0.3.2 release
+# these should be ignored due to a rebase after tagging 0.3.2
+0a8102ec4c45aef9178fecab756b2e44906e1cbf
+b775ca53b7721fdf20444b657db33aac162fac33
+bfdc04c175774f8f99159c785995cbb25785dff0
+e58a7911ea54c3f3de181061b139054aa590ce2e
+fdb66b0594d3e66fbf7bb586597c837649c9dc56
