@@ -29,22 +29,24 @@ body = """
 {% for group, commits in commits | unique(attribute="message") | filter(attribute="merge_commit", value=false) | group_by(attribute="group") %}
     ### {{ group | striptags | trim | upper_first }}
     {% for commit in commits %}
-        - {% if commit.scope %}({{ commit.scope | upper_first }}) {% endif%}{{ commit.message | split(pat="\n") | first | split(pat=": ") | last | trim | upper_first }}\
-    {% endfor %}
+        - {% if commit.scope %}({{ commit.scope | upper_first }}) {% endif%}{{ commit.message | split(pat="\n") | first | split(pat=": ") | last | trim | upper_first }}
+    {%- endfor %}
 {% endfor %}\n
 """
 
 footer = """
+{%- macro remote_url() -%}
+  https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
+{%- endmacro -%}
+
 {% for release in releases -%}
     {% if release.version -%}
         {% if release.previous.version -%}
             [{{ release.version | trim_start_matches(pat="v") }}]: \
-                https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}\
-                    /compare/{{ release.previous.version }}..{{ release.version }}
+                {{ self::remote_url() }}/compare/{{ release.previous.version }}..{{ release.version }}
         {% endif -%}
     {% else -%}
-        [unreleased]: https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}\
-            /compare/{{ release.previous.version }}..HEAD
+        [unreleased]: {{ self::remote_url() }}/compare/{{ release.previous.version }}..HEAD
     {% endif -%}
 {% endfor %}
 """
@@ -86,10 +88,11 @@ commit_parsers = [
 
   { message = "^docs:.*copyright", skip = true },
 
+  { message = "^chore\\(release\\): prepare for", skip = true },
+  { message = "^chore\\(changelog\\): update changelog", skip = true },
+
   # skip merge commits
   { message = "^[Mm]erge", skip = true },
-
-  { message = "^chore\\(release\\): prepare for", skip = true },
 
   { message = "^feat", group = "<!-- 0 -->Features" },
   { message = "^fix", group = "<!-- 1 -->Fixes" },
