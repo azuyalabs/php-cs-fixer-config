@@ -2,6 +2,4 @@ parameters:
   level: 8
   paths:
     - src
-  reportUnmatchedIgnoredErrors: true # Do not allow outdated errors in the baseline
-  treatPhpDocTypesAsCertain: false
   tipsOfTheDay: false
