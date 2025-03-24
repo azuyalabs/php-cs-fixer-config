@@ -13,13 +13,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Documentation
 
-- Add pre-processor to fix typos
-- Initial changelog using git-cliff
+- (Changelog) Add changelog using git-cliff
 - Add Code of Conduct text
 - Move DCO fulltext to its own file
 
 ### Other
 
+- (Changelog) Use macro to generate remote url
+- (Changelog) Revert order of releases to chronological
 - Remove Phan static analysis tool
 
 ## [0.3.2] - 2025-02-16
@@ -136,5 +137,4 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [0.2.0]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.2..0.2.0
 [0.1.2]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.1..0.1.2
 [0.1.1]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.0..0.1.1
-[0.1.0]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.2..0.1.0
 
