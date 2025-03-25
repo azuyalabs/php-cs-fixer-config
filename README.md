@@ -1,6 +1,6 @@
 # php-cs-fixer-config
 
-PHP CS Fixer config for AzuyaLabs projects
+PHP CS Fixer configuration for AzuyaLabs projects
 
 ## Installation
 
@@ -109,3 +109,18 @@ the PHPCS Fixer binary or the configred Composer scripts.
 
 This custom configuration is based on the @PER-CS and @Symfony rulesets, with
 a few additional enabled rules (e.g. concerning spaces, etc.).
+
+## Contributing
+
+Contributions are encouraged and welcome; I am always happy to get feedback or pull requests on GitHub :)
+Create [GitHub Issues](https://github.com/azuyalabs/php-cs-fixer-config/issues) for bugs and new features and comment on the ones you
+are interested in.
+
+If you enjoy what I am making, an extra cup of coffee is very much appreciated :). Your support helps me to put more
+time into Open-Source Software projects like this.
+
+<a href="https://www.buymeacoffee.com/sachatelgenhof" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+## License
+
+This project is open-sourced software licensed under the MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
