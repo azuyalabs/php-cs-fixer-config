@@ -103,7 +103,7 @@ Use `composer cs` to do a dry-run.
 
 For those who like to have code styling issues fixed automatically, you can
 opt to create a Git pre-commit hook, or have your IDE configured to utilize
-the PHPCS Fixer binary or the configred Composer scripts.
+the PHPCS Fixer binary or the configured Composer scripts.
 
 ## Code Style
 
