@@ -88,8 +88,9 @@ commit_parsers = [
 
   { message = "^docs:.*copyright", skip = true },
 
-  { message = "^chore\\(release\\): prepare for", skip = true },
   { message = "^chore\\(changelog\\): update changelog", skip = true },
+  { message = "^chore\\(readme\\)", skip = true },
+  { message = "^chore\\(release\\): prepare for", skip = true },
 
   # skip merge commits
   { message = "^[Mm]erge", skip = true },
