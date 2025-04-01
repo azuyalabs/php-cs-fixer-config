@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Other
 
+- Remove PHP 7.4 requirement
 - Upgrade PHPStan to v2.0
 
 ## [0.3.3] - 2025-03-24
