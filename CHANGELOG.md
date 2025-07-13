@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and
 [Conventional Commits](https://conventionalcommits.org) for commit conventions.
 
+## [0.3.5] - 2025-07-13
+
+### Other
+
+- Bump composer package versions to latest installed versions
+
 ## [0.3.4] - 2025-04-30
 
 ### Documentation
@@ -139,6 +145,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Exclude vendor directory
 - Initial commit
 
+[0.3.5]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.4..0.3.5
 [0.3.4]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.3..0.3.4
 [0.3.3]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.2..0.3.3
 [0.3.2]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.1..0.3.2
