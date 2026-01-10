@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and
 [Conventional Commits](https://conventionalcommits.org) for commit conventions.
 
+## [unreleased]
+
+### Other
+
+- Drop PHP 8.1 support
+- Remove Psalm static analysis tool
+- Bump composer package versions to latest installed versions
+
 ## [0.3.5] - 2025-07-13
 
 ### Other
