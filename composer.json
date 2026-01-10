@@ -39,8 +39,7 @@
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-phpunit": "^2.0",
     "phpstan/phpstan-strict-rules": "^2.0",
-    "phpunit/phpunit": "^10.5",
-    "vimeo/psalm": "^6.13"
+    "phpunit/phpunit": "^10.5"
   },
   "autoload": {
     "psr-4": {
@@ -59,14 +58,9 @@
     "sort-packages": true
   },
   "scripts": {
-    "analyse": [
-      "@phpstan",
-      "@psalm"
-    ],
     "cs": "vendor/bin/php-cs-fixer fix -v --diff --dry-run",
     "cs-fix": "vendor/bin/php-cs-fixer fix -v",
     "phpstan": "vendor/bin/phpstan analyse",
-    "psalm": "vendor/bin/psalm --threads=2",
     "test": "vendor/bin/phpunit"
   }
 }
