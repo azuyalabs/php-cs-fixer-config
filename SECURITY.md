@@ -18,7 +18,8 @@ support of that retired PHP version.
 ## Reporting a Vulnerability
 
 If you would like to report a vulnerability or have any security concerns with this project,
-please [open an issue](https://github.com/azuyalabs/php-cs-fixer-config/issues/new?labels=security).
+please use [GitHub's private vulnerability reporting](https://github.com/azuyalabs/php-cs-fixer-config/security/advisories/new)
+to disclose it privately before a fix is available.
 
 To investigate your request as good as possible, please include any of the following when reporting:
 
