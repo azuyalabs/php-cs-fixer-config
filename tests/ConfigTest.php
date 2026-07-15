@@ -23,14 +23,14 @@ use PHPUnit\Framework\TestCase;
 
 final class ConfigTest extends TestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_implements_interface(): void
     {
         $config = new Config();
         $this->assertInstanceOf(ConfigInterface::class, $config);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_correct_values(): void
     {
         $config = new Config();
@@ -39,7 +39,7 @@ final class ConfigTest extends TestCase
         $this->assertTrue($config->getRiskyAllowed());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_replace_all_rules(): void
     {
         $config = new Config();
@@ -57,7 +57,7 @@ final class ConfigTest extends TestCase
         $this->assertSame($rules, $config->getRules());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_override_existing_rule(): void
     {
         $config = new Config();
@@ -77,14 +77,14 @@ final class ConfigTest extends TestCase
         $this->assertFalse($rules['@Symfony']);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_has_rules(): void
     {
         $config = new Config();
         $this->assertNotEmpty($config->getRules());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_has_header_comment_fixer_by_default(): void
     {
         $config = new Config();
@@ -92,7 +92,7 @@ final class ConfigTest extends TestCase
         $this->assertArrayHasKey('header_comment', $rules);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_render_header_when_skipped(): void
     {
         $config = new Config();
@@ -102,11 +102,8 @@ final class ConfigTest extends TestCase
         $this->assertArrayNotHasKey('header_comment', $rules);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider yearProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('yearProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_should_have_copyright_year_in_header(?string $year, string $expected): void
     {
         $config = new Config($year);
@@ -126,11 +123,8 @@ final class ConfigTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider orgProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('orgProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_should_have_organization_name_in_header(?string $org, string $expected): void
     {
         $config = new Config(date('Y'), $org);
@@ -151,11 +145,8 @@ final class ConfigTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider pkgProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('pkgProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_should_have_package_name_in_header(?string $pkg, string $expected): void
     {
         $config = new Config(date('Y'), null, $pkg);
