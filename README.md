@@ -1,6 +1,6 @@
 # php-cs-fixer-config
 
-PHP CS Fixer configuration for AzuyaLabs projects
+PHP CS Fixer config for AzuyaLabs projects
 
 ## Installation
 
