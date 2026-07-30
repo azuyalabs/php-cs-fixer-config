@@ -7,8 +7,22 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [unreleased]
 
+### Refactor
+
+- Replace annotations with attributes in tests
+
+### Documentation
+
+- Update CODE_OF_CONDUCT to Contributor Covenant v3.0
+- Update project description
+- Change link to GitHub's vulnerability reporting
+- (Changelog) Update changelog with latest changes
+
 ### Other
 
+- Update .editorconfig settings
+- (Rector) Update configuration to latest syntax
+- Correct minimum PHP version for Rector
 - Drop PHP 8.1 support
 - Remove Psalm static analysis tool
 - Bump composer package versions to latest installed versions
@@ -153,6 +167,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Exclude vendor directory
 - Initial commit
 
+[unreleased]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.5..HEAD
 [0.3.5]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.4..0.3.5
 [0.3.4]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.3..0.3.4
 [0.3.3]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.2..0.3.3
@@ -164,4 +179,3 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [0.2.0]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.2..0.2.0
 [0.1.2]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.1..0.1.2
 [0.1.1]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.0..0.1.1
-
