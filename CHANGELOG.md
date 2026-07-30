@@ -13,19 +13,19 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Documentation
 
-- Update CODE_OF_CONDUCT to Contributor Covenant v3.0
-- Update project description
-- Change link to GitHub's vulnerability reporting
 - (Changelog) Update changelog with latest changes
+- Change link to GitHub's vulnerability reporting
+- Update project description
+- Update CODE_OF_CONDUCT to Contributor Covenant v3.0
 
 ### Other
 
-- Update .editorconfig settings
-- (Rector) Update configuration to latest syntax
-- Correct minimum PHP version for Rector
-- Drop PHP 8.1 support
-- Remove Psalm static analysis tool
 - Bump composer package versions to latest installed versions
+- Remove Psalm static analysis tool
+- Drop PHP 8.1 support
+- Correct minimum PHP version for Rector
+- (Rector) Update configuration to latest syntax
+- Update .editorconfig settings
 
 ## [0.3.5] - 2025-07-13
 

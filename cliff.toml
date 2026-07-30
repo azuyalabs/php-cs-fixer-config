@@ -11,6 +11,9 @@ repo = "php-cs-fixer-config"
 
 [changelog]
 
+# Limit the number of commits processed to keep changelog manageable
+limit_commits = 200
+
 header = """
 # Changelog\n
 All notable changes to this project will be documented in this file.
@@ -26,10 +29,10 @@ body = """
     ## [unreleased]
 {% endif -%}
 
-{% for group, commits in commits | unique(attribute="message") | filter(attribute="merge_commit", value=false) | group_by(attribute="group") %}
+{% for group, commits in commits | filter(attribute="merge_commit", value=false) | group_by(attribute="group") %}
     ### {{ group | striptags | trim | upper_first }}
     {% for commit in commits %}
-        - {% if commit.scope %}({{ commit.scope | upper_first }}) {% endif%}{{ commit.message | split(pat="\n") | first | split(pat=": ") | last | trim | upper_first }}
+        - {% if commit.scope %}({{ commit.scope | upper_first }}) {% endif %}{{ commit.message | split(pat="\n") | first | split(pat=": ") | last | trim | upper_first }}
     {%- endfor %}
 {% endfor %}\n
 """
@@ -54,6 +57,9 @@ footer = """
 # Remove leading and trailing whitespaces from the changelog's body.
 trim = true
 
+# Render body even when there are no releases to process.
+render_always = true
+
 [git]
 
 # Parse commits according to the conventional commits specification.
@@ -68,11 +74,13 @@ split_commits = false
 
 # An array of regex based parsers to modify commit messages prior to further processing.
 commit_preprocessors = [
-  { pattern = "\\(#([0-9]+)\\)", replace = "([#${1}](<REPO>/issues/${1}))"},
+  { pattern = "\\(#([0-9]+)\\)", replace = "([#${1}](https://github.com/azuyalabs/php-cs-fixer-config/issues/${1}))"},
+
+  # Strip HTML tags and content from commit messages
+  { pattern = "<[^>]*>", replace = "" },
 
   # Check spelling of the commit message using https://github.com/crate-ci/typos.
   # If the spelling is incorrect, it will be fixed automatically.
-  { pattern = '.*', replace_command = 'typos --write-changes -' }
 ]
 
 # An array of regex based parsers for extracting data from the commit message.
@@ -106,10 +114,10 @@ commit_parsers = [
 ]
 
 # Prevent commits that are breaking from being excluded by commit parsers.
-protect_breaking_commits = false
+protect_breaking_commits = true
 
 # Exclude commits that are not matched by any commit parser.
-filter_commits = true
+filter_commits = false
 
 # Regex to select git tags that represent releases.
 tag_pattern = "[0-9].*"
@@ -127,4 +135,9 @@ topo_order = false
 
 # Order of commits in each group/release within the changelog.
 # Allowed values: newest, oldest
-sort_commits = "newest"
+sort_commits = "oldest"
+
+# An array of link parsers for extracting external references, and turning them into URLs, using regex.
+link_parsers = [
+  { pattern = "#(\\d+)", href = "https://github.com/azuyalabs/php-cs-fixer-config/issues/$1" },
+]
