@@ -32,9 +32,9 @@ final class Config extends PhpCsFixerConfig
     private bool $useHeaderComment = true;
 
     public function __construct(
-        private ?string $yr = null,
-        private ?string $org = null,
-        private ?string $pkg = null,
+        private readonly ?string $yr = null,
+        private readonly ?string $org = null,
+        private readonly ?string $pkg = null,
     ) {
         parent::__construct(self::ORG);
 
