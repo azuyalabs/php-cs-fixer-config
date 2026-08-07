@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and
 [Conventional Commits](https://conventionalcommits.org) for commit conventions.
 
-## [unreleased]
+## [0.3.6] - 2026-07-30
 
 ### Refactor
 
@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Correct minimum PHP version for Rector
 - (Rector) Update configuration to latest syntax
 - Update .editorconfig settings
+- (Cliff) Update git-cliff configuration and regenerate changelog
 
 ## [0.3.5] - 2025-07-13
 
@@ -41,8 +42,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Other
 
-- Remove PHP 7.4 requirement
 - Upgrade PHPStan to v2.0
+- Remove PHP 7.4 requirement
 
 ## [0.3.3] - 2025-03-24
 
@@ -52,15 +53,15 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Documentation
 
-- (Changelog) Add changelog using git-cliff
-- Add Code of Conduct text
 - Move DCO fulltext to its own file
+- Add Code of Conduct text
+- (Changelog) Add changelog using git-cliff
 
 ### Other
 
-- (Changelog) Use macro to generate remote url
-- (Changelog) Revert order of releases to chronological
 - Remove Phan static analysis tool
+- (Changelog) Revert order of releases to chronological
+- (Changelog) Use macro to generate remote url
 
 ## [0.3.2] - 2025-02-16
 
@@ -70,8 +71,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Other
 
-- Upgrade Psalm
 - Fix copyright header with correct package name
+- Upgrade Psalm
 
 ## [0.3.1] - 2024-12-12
 
@@ -85,8 +86,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Other
 
-- Remove deprecated PHPStan option
 - Add Psalm settings to stop warnings
+- Remove deprecated PHPStan option
 
 ## [0.3.0] - 2024-04-08
 
@@ -136,14 +137,16 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Refactor
 
-- Make first word of the description lowercase
 - Make the header copyright years dynamic to allow to set a start year. Embed the header to avoid projects not able to find the header file
+- Make first word of the description lowercase
 
 ### Code Style
 
-- Enable fixer that adds a space with concatenation
+- Fix formatting issues and use file to render header comment
 - Move variable closer to the related following code block
 - Fix formatting issues and use file to render header comment
+- Move variable closer to the related following code block
+- Enable fixer that adds a space with concatenation
 
 ### Testing
 
@@ -151,23 +154,26 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Other
 
-- Remove obsolete header file
-- Add rules for PHPUnit, normalizing equal sign and array indentation. Fix code style issues
-- Fix code style issues and remove old header comment
-- Remove obsolete header file and references to it
-- Shorten the PHP CS fix script and add a script to perform a dry-run
-- Replace deprecated PER ruleset with PER-CS
-- Include git attributes file
+- Initial commit
+- Initial commit
+- Exclude vendor directory
+- Exclude PHP CS Fixer cached file and add default Composer scripts
+- Add source files and initial PHP CS Fixer configuration
+- Add editorconfig to set consistent code styling and formatting settings
+- Remove unused package and fix formatting issues
+- Exclude phpactor configuration and resort ignore list
 - Add code analysis packages and their configuration files
 - Exclude phpactor configuration and resort ignore list
-- Remove unused package and fix formatting issues
-- Add editorconfig to set consistent code styling and formatting settings
-- Add source files and initial PHP CS Fixer configuration
-- Exclude PHP CS Fixer cached file and add default Composer scripts
-- Exclude vendor directory
-- Initial commit
+- Add code analysis packages and their configuration files
+- Include git attributes file
+- Replace deprecated PER ruleset with PER-CS
+- Shorten the PHP CS fix script and add a script to perform a dry-run
+- Remove obsolete header file and references to it
+- Fix code style issues and remove old header comment
+- Add rules for PHPUnit, normalizing equal sign and array indentation. Fix code style issues
+- Remove obsolete header file
 
-[unreleased]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.5..HEAD
+[0.3.6]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.5..0.3.6
 [0.3.5]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.4..0.3.5
 [0.3.4]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.3..0.3.4
 [0.3.3]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.2..0.3.3
@@ -179,3 +185,4 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [0.2.0]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.2..0.2.0
 [0.1.2]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.1..0.1.2
 [0.1.1]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.0..0.1.1
+
