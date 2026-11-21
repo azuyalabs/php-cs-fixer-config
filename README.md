@@ -69,24 +69,6 @@ Add `.php-cs-fixer.cache` (this is the cache file created by `php-cs-fixer`) to 
 vendor/
 ```
 
-### GitLab CI/CD
-
-If you have included the two helper scripts in your `composer.json` file, you can use those in the GitLab CI
-configuration of your project.
-
-To add a job that will check the Code Style settings as part of your test stage, include this in your `.gitlab-ci.yml`
-file:
-
-```yaml
-cs-check:
-    stage: test
-    script:
-        - composer cs
-```
-
-In case you don't want or have the helper Composer script, replace the above `composer cs` script
-with `vendor/bin/php-cs-fixer fix -v --diff --dry-run`
-
 ## Fixing Code Style issues
 
 ### Manually

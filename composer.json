@@ -20,9 +20,9 @@
   ],
   "homepage": "https://github.com/azuyalabs/php-cs-fixer-config",
   "support": {
-    "issues": "https://gitlab.com/azuyalabs/php-cs-fixer-config/-/issues",
-    "source": "https://gitlab.com/azuyalabs/php-cs-fixer-config",
-    "docs": "https://gitlab.com/azuyalabs/php-cs-fixer-config"
+    "issues": "https://github.com/azuyalabs/php-cs-fixer-config/issues",
+    "source": "https://github.com/azuyalabs/php-cs-fixer-config",
+    "docs": "https://github.com/azuyalabs/php-cs-fixer-config"
   },
   "funding": [
     {
