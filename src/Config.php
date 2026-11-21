@@ -132,9 +132,14 @@ final class Config extends PhpCsFixerConfig
         }
 
         $cmp = \json_decode($cmp_ct);
+        if (null === $cmp) {
+            throw new \RuntimeException(sprintf('unable to parse %s: %s', self::COMPOSER_FILENAME, \json_last_error_msg()));
+        }
 
         $description = $cmp->description ?? self::UNKNOWN_VALUE;
-        [$org, $pkg] = explode('/', $cmp->name);
+        $parts = ($cmp->name ?? '') !== '' ? explode('/', $cmp->name, 2) : [];
+        $org = $parts[0] ?? self::UNKNOWN_VALUE;
+        $pkg = $parts[1] ?? self::UNKNOWN_VALUE;
 
         if (null !== $this->pkg && '' !== $this->pkg && '0' !== $this->pkg) {
             $pkg = $this->pkg;

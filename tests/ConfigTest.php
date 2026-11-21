@@ -114,6 +114,27 @@ final class ConfigTest extends TestCase
         $this->assertFalse($rules['@Symfony']);
     }
 
+    #[\PHPUnit\Framework\Attributes\DataProvider('composerJsonProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_uses_placeholders_for_incomplete_composer_json(string $contents, string $expectedOrg, string $expectedPkg): void
+    {
+        $header = $this->withComposerJson($contents, static fn (): string => (new Config())->getRules()['header_comment']['header']);
+
+        $this->assertStringContainsString("part of the '" . $expectedPkg . "' package", $header);
+        $this->assertStringContainsString('(c) 2015 - ' . date('Y') . ' ' . $expectedOrg, $header);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_rejects_invalid_composer_json(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('unable to parse composer.json');
+
+        $this->withComposerJson('{not valid json', static function (): void {
+            new Config();
+        });
+    }
+
     #[\PHPUnit\Framework\Attributes\DataProvider('yearProvider')]
     #[\PHPUnit\Framework\Attributes\Test]
     public function it_should_have_copyright_year_in_header(?string $year, string $expected): void
@@ -178,5 +199,36 @@ final class ConfigTest extends TestCase
             [null, sprintf($patt, 'php-cs-fixer-config')],
             ['', sprintf($patt, 'php-cs-fixer-config')],
         ];
+    }
+
+    public static function composerJsonProvider(): array
+    {
+        return [
+            'no name' => ['{"description":"Example project"}', 'unknown', 'unknown'],
+            'no vendor separator' => ['{"name":"single"}', 'single', 'unknown'],
+        ];
+    }
+
+    /**
+     * @param callable(): mixed $callback
+     */
+    private function withComposerJson(string $contents, callable $callback): mixed
+    {
+        $cwd = getcwd();
+        $dir = sys_get_temp_dir() . '/php-cs-fixer-config-' . bin2hex(random_bytes(6));
+        mkdir($dir);
+        file_put_contents($dir . '/composer.json', $contents);
+
+        try {
+            chdir($dir);
+
+            return $callback();
+        } finally {
+            if (false !== $cwd) {
+                chdir($cwd);
+            }
+            unlink($dir . '/composer.json');
+            rmdir($dir);
+        }
     }
 }
