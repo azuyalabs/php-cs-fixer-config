@@ -118,7 +118,7 @@ final class ConfigTest extends TestCase
     #[\PHPUnit\Framework\Attributes\Test]
     public function it_uses_placeholders_for_incomplete_composer_json(string $contents, string $expectedOrg, string $expectedPkg): void
     {
-        $header = $this->withComposerJson($contents, static fn (): string => (new Config())->getRules()['header_comment']['header']);
+        $header = $this->withComposerJson($contents, static fn (string $root): string => (new Config(null, null, null, $root))->getRules()['header_comment']['header']);
 
         $this->assertStringContainsString("part of the '" . $expectedPkg . "' package", $header);
         $this->assertStringContainsString('(c) 2015 - ' . date('Y') . ' ' . $expectedOrg, $header);
@@ -128,10 +128,10 @@ final class ConfigTest extends TestCase
     public function it_rejects_invalid_composer_json(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('unable to parse composer.json');
+        $this->expectExceptionMessage('unable to parse');
 
-        $this->withComposerJson('{not valid json', static function (): void {
-            new Config();
+        $this->withComposerJson('{not valid json', static function (string $root): void {
+            new Config(null, null, null, $root);
         });
     }
 
@@ -210,23 +210,17 @@ final class ConfigTest extends TestCase
     }
 
     /**
-     * @param callable(): mixed $callback
+     * @param callable(string): mixed $callback
      */
     private function withComposerJson(string $contents, callable $callback): mixed
     {
-        $cwd = getcwd();
         $dir = sys_get_temp_dir() . '/php-cs-fixer-config-' . bin2hex(random_bytes(6));
         mkdir($dir);
         file_put_contents($dir . '/composer.json', $contents);
 
         try {
-            chdir($dir);
-
-            return $callback();
+            return $callback($dir);
         } finally {
-            if (false !== $cwd) {
-                chdir($cwd);
-            }
             unlink($dir . '/composer.json');
             rmdir($dir);
         }

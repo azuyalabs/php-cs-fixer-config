@@ -35,6 +35,7 @@ final class Config extends PhpCsFixerConfig
         private readonly ?string $yr = null,
         private readonly ?string $org = null,
         private readonly ?string $pkg = null,
+        private readonly ?string $root = null,
     ) {
         parent::__construct(self::ORG);
 
@@ -109,8 +110,15 @@ final class Config extends PhpCsFixerConfig
      */
     private function headerComment(array $rules): array
     {
-        if (! \is_readable(self::COMPOSER_FILENAME)) {
-            throw new \RuntimeException(sprintf('unable to read %s file', self::COMPOSER_FILENAME));
+        $root = $this->root ?? \getcwd();
+        if (false === $root || '' === $root) {
+            throw new \RuntimeException('unable to determine the project root');
+        }
+
+        $composerPath = $root . DIRECTORY_SEPARATOR . self::COMPOSER_FILENAME;
+
+        if (! \is_readable($composerPath)) {
+            throw new \RuntimeException(sprintf('unable to read %s file', $composerPath));
         }
 
         $header = <<<'HDR'
@@ -126,14 +134,14 @@ final class Config extends PhpCsFixerConfig
         @author Sacha Telgenhof <me at sachatelgenhof dot com>
         HDR;
 
-        $cmp_ct = \file_get_contents(self::COMPOSER_FILENAME);
+        $cmp_ct = \file_get_contents($composerPath);
         if (false === $cmp_ct) {
-            throw new \RuntimeException('unable to read composer.json contents');
+            throw new \RuntimeException(sprintf('unable to read %s contents', $composerPath));
         }
 
         $cmp = \json_decode($cmp_ct);
         if (null === $cmp) {
-            throw new \RuntimeException(sprintf('unable to parse %s: %s', self::COMPOSER_FILENAME, \json_last_error_msg()));
+            throw new \RuntimeException(sprintf('unable to parse %s: %s', $composerPath, \json_last_error_msg()));
         }
 
         $description = $cmp->description ?? self::UNKNOWN_VALUE;
