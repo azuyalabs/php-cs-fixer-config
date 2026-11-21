@@ -6,14 +6,15 @@ The following versions are supported with security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| >0.3    | :white_check_mark: |
-| <0.2    | :x:                |
+| 0.3.6  | :white_check_mark: |
+| 0.3.5  | :white_check_mark: |
+| <=0.3.4  | :x: |
+| <0.2  | :x: |
 
 As for supported PHP versions, this project only supports the actively supported versions of PHP and versions of PHP
-that only receive critical security updates. Currently, that is PHP 8.2, 8.3, 8.4 and 8.5.
+that only receive critical security updates. Currently, that is PHP 8.2, 8.3, 8.4, 8.5 and 8.6.
 Please refer to the [supported versions](https://www.php.net/supported-versions.php) page, to find more details.
-When a version of PHP becomes EOL, generally a new release of this project will be issued that sunsets the
-support of that retired PHP version.
+When a version of PHP becomes EOL, support of that retired PHP version will be dropped with the next scheduled release.
 
 ## Reporting a Vulnerability
 
