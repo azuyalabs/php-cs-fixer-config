@@ -81,7 +81,6 @@ final class Config extends PhpCsFixerConfig
             'no_superfluous_phpdoc_tags' => ['remove_inheritdoc' => true],
             'ordered_class_elements' => true,
             'header_comment' => [
-                'header' => 'Made with love.',
                 'comment_type' => 'PHPDoc',
             ],
         ];
@@ -98,7 +97,9 @@ final class Config extends PhpCsFixerConfig
     public function skipHeaderComment(): void
     {
         $this->useHeaderComment = false;
-        $this->setDefaultRules();
+        $rules = $this->getRules();
+        unset($rules['header_comment']);
+        $this->setRules($rules);
     }
 
     /**
@@ -171,6 +172,6 @@ final class Config extends PhpCsFixerConfig
         $now = date('Y');
         $year = $this->yr ?? self::BIRTH_YEAR;
 
-        return $now !== $year ? $year . ' - ' . $now : $year;
+        return $year >= $now ? $year : $year . ' - ' . $now;
     }
 }

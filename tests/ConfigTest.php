@@ -102,6 +102,18 @@ final class ConfigTest extends TestCase
         $this->assertArrayNotHasKey('header_comment', $rules);
     }
 
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_keeps_custom_rules_when_header_is_skipped(): void
+    {
+        $config = new Config();
+        $config->setRules(array_merge($config->getRules(), ['@Symfony' => false]));
+        $config->skipHeaderComment();
+
+        $rules = $config->getRules();
+        $this->assertArrayNotHasKey('header_comment', $rules);
+        $this->assertFalse($rules['@Symfony']);
+    }
+
     #[\PHPUnit\Framework\Attributes\DataProvider('yearProvider')]
     #[\PHPUnit\Framework\Attributes\Test]
     public function it_should_have_copyright_year_in_header(?string $year, string $expected): void
@@ -115,10 +127,12 @@ final class ConfigTest extends TestCase
     public static function yearProvider(): array
     {
         $now = date('Y');
+        $next = (string) ((int) $now + 1);
 
         return [
             ['2018', sprintf('2018 - %s', $now)],
             [$now, $now],
+            [$next, $next],
             [null, sprintf('2015 - %s', $now)],
         ];
     }
