@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and
 [Conventional Commits](https://conventionalcommits.org) for commit conventions.
 
-## [unreleased]
+## [0.3.7] - 2026-11-22
 
 ### Fixes
 
@@ -199,7 +199,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Add rules for PHPUnit, normalizing equal sign and array indentation. Fix code style issues
 - Remove obsolete header file
 
-[unreleased]: https://github.com/azuyalabs/php-cs-fixer-config/compare/-1.3.6..HEAD
+[0.3.7]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.6..0.3.7
 [0.3.6]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.5..0.3.6
 [0.3.5]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.4..0.3.5
 [0.3.4]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.3.3..0.3.4
@@ -212,3 +212,4 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [0.2.0]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.2..0.2.0
 [0.1.2]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.1..0.1.2
 [0.1.1]: https://github.com/azuyalabs/php-cs-fixer-config/compare/0.1.0..0.1.1
+

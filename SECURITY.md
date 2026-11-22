@@ -6,8 +6,8 @@ The following versions are supported with security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |
+| 0.3.7  | :white_check_mark: |
 | 0.3.6  | :white_check_mark: |
-| 0.3.5  | :white_check_mark: |
 | <=0.3.4  | :x: |
 | <0.2  | :x: |
 
